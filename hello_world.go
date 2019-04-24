@@ -1,6 +1,6 @@
-package greeting
+package hello
 
-// simple hello world
+// HelloWorld simple
 func HelloWorld() string {
-	return "Hello, World!"
+	return "Hello, World!\n"
 }
