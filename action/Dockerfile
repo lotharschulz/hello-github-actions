@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.9.3
 
 LABEL "inspiredby"="https://github.com/actions/bin/blob/master/sh/Dockerfile @ 2019 04 24"
 LABEL "maintainer"="Lothar Schulz <http://bit.ly/2zVLbWh>"
