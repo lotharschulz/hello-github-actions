@@ -1,4 +1,5 @@
-workflow "shaking finger action" {
+#workflow "shaking finger action" {
+workflow "shell commands" {
   on = "pull_request"
   resolves = ["shell"]
 }
