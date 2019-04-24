@@ -6,4 +6,5 @@ workflow "shaking finger action" {
 action "post gif on fail" {
   uses = "jessfraz/shaking-finger-action@master"
   secrets = ["GITHUB_TOKEN"]
+  runs = "make test"
 }
