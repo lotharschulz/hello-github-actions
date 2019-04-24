@@ -1,13 +1,27 @@
 # Hello github actions
 
 ### build
-
-``` 
-CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hello_world .
+```
+make build
 ```
 
 ### test
 ```
-go test
-go test -v --bench . --benchmem
+make test
+make benchmark
+```
+
+### run
+```
+make run
+```
+
+### build docker image
+```
+make build.docker
+```
+
+### clean
+```
+make clean
 ```
