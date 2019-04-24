@@ -34,7 +34,6 @@ clean:
 run:
 		$(GOBUILD) -o $(BINARY_NAME) -v ./...
 		chmod +x ./$(BINARY_NAME)
-		
 		./$(BINARY_NAME)
 
 # docker build
