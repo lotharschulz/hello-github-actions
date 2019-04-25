@@ -1,15 +1,21 @@
 workflow "shell commands & shaking finger" {
   on = "pull_request"
   resolves = [
-    "ls -ltr",
-    "post gif on fail",
     "test",
+    "benchmark",
+    "post gif on fail",
+    "build.docker"
   ]
 }
 
 action "test" {
   uses = "lotharschulz/hello-github-actions/action@master"
-  args = ["ls -ltr", "make test"]
+  args = ["make test"]
+}
+
+action "benchmark" {
+  uses = "lotharschulz/hello-github-actions/action@master"
+  args = ["make benchmark"]
 }
 
 action "post gif on fail" {
@@ -17,8 +23,8 @@ action "post gif on fail" {
   secrets = ["GITHUB_TOKEN"]
 }
 
-action "ls -ltr" {
+action "build.docker" {
   uses = "lotharschulz/hello-github-actions/action@master"
-  args = ["ls -ltr"]
+  args = ["build.docker"]
   needs = ["test"]
 }
