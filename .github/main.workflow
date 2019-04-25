@@ -25,6 +25,6 @@ action "post gif on fail" {
 
 action "build.docker" {
   uses = "lotharschulz/hello-github-actions/action@master"
-  args = ["build.docker"]
+  args = ["make build.docker"]
   needs = ["test"]
 }
