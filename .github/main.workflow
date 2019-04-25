@@ -8,7 +8,7 @@ workflow "shell commands & shaking finger" {
 
 action "shell" {
   uses = "lotharschulz/hello-github-actions/action@master"
-  args = ["ls -ltr", "make -help"]
+  args = ["ls -ltr", "make"]
 }
 
 action "post gif on fail" {
