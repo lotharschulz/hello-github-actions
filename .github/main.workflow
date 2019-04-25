@@ -1,4 +1,4 @@
-workflow "shell commands and shaking finger" {
+workflow "shell commands & shaking finger" {
   on = "pull_request"
   resolves = [
     "shell",
@@ -8,7 +8,7 @@ workflow "shell commands and shaking finger" {
 
 action "shell" {
   uses = "lotharschulz/hello-github-actions/action@master"
-  args = ["ls -ltr"]
+  args = ["ls -ltr", "make test"]
 }
 
 action "post gif on fail" {
