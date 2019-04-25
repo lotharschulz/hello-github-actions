@@ -1,4 +1,5 @@
-FROM golang:1.12.4-alpine3.9
+FROM golang:1.12.4
+# FROM golang:1.12.4-alpine3.9
 # FROM alpine:3.9.3
 
 LABEL "inspiredby"="https://github.com/actions/bin/blob/master/sh/Dockerfile @ 2019 04 24"
@@ -10,8 +11,8 @@ LABEL "com.github.actions.description"="Runs one or more alpine shell commands i
 LABEL "com.github.actions.icon"="terminal"
 LABEL "com.github.actions.color"="blue"
 
-RUN apk add --no-cache \
-    make 
+#RUN apk add --no-cache \
+#    make 
 #	bash \
 #	ca-certificates \
 #	coreutils \
