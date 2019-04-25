@@ -1,23 +1,23 @@
 workflow "shell commands & shaking finger" {
   on = "pull_request"
   resolves = [
-    "shell",
-    "shell 2",
+    "test",
+    "benchmark",
   ]
 }
 
-action "shell" {
+action "test" {
   uses = "lotharschulz/hello-github-actions/action@master"
   args = ["ls -ltr", "make test"]
+}
+
+action "benchmark" {
+  uses = "lotharschulz/hello-github-actions/action@master"
+  args = ["ls -ltr", "make benchmark"]
 }
 
 action "post gif on fail" {
   uses = "jessfraz/shaking-finger-action@master"
   secrets = ["GITHUB_TOKEN"]
-}
-
-action "shell 2" {
-  uses = "lotharschulz/hello-github-actions/action@master"
-  args = ["ls -ltr"]
-  needs = ["post gif on fail", "shell"]
+  needs = ["test", "benchmark"]
 }
