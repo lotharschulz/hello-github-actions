@@ -2,7 +2,7 @@ workflow "shell commands & shaking finger" {
   on = "pull_request"
   resolves = [
     "test",
-    "benchmark"
+    "post gif on fail"
   ]
 }
 
