@@ -1,5 +1,4 @@
-#workflow "shaking finger action" {
-workflow "shell commands" {
+workflow "shell commands & shaking finger" {
   on = "pull_request"
   resolves = ["shell"]
 }
@@ -9,7 +8,8 @@ action "shell" {
   args = ["ls -ltr"]
 }
 
-# action "post gif on fail" {
-#  uses = "jessfraz/shaking-finger-action@master"
-#  secrets = ["GITHUB_TOKEN"]
-#}
+action "alpine shell for GitHub Actions" {
+  uses = "jessfraz/shaking-finger-action@master"
+  needs = ["shell"]
+  secrets = ["GITHUB_TOKEN"]
+}
