@@ -8,8 +8,8 @@ action "shell" {
   args = ["ls -ltr"]
 }
 
-action "alpine shell for GitHub Actions" {
+action "post gif on fail" {
   uses = "jessfraz/shaking-finger-action@master"
-  needs = ["shell"]
   secrets = ["GITHUB_TOKEN"]
+  needs = ["shell"]
 }
