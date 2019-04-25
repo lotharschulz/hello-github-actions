@@ -2,7 +2,7 @@ workflow "shell commands and shaking finger" {
   on = "pull_request"
   resolves = [
     "shell",
-    "alpine shell for GitHub Actions",
+    "shell 2",
   ]
 }
 
