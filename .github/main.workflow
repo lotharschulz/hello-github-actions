@@ -2,7 +2,7 @@ workflow "shell commands & shaking finger" {
   on = "pull_request"
   resolves = [
     "test",
-    "benchmark",
+    "benchmark"
   ]
 }
 
@@ -19,5 +19,5 @@ action "benchmark" {
 action "post gif on fail" {
   uses = "jessfraz/shaking-finger-action@master"
   secrets = ["GITHUB_TOKEN"]
-  needs = ["test", "benchmark"]
+  needs = ["benchmark", "test"]
 }
