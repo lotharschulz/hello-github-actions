@@ -10,9 +10,9 @@ LABEL "com.github.actions.description"="Runs one or more alpine shell commands i
 LABEL "com.github.actions.icon"="terminal"
 LABEL "com.github.actions.color"="blue"
 
-#RUN apk add --no-cache \
+RUN apk add --no-cache \
+    make 
 #	bash \
-#   make \
 #	ca-certificates \
 #	coreutils \
 #	curl \
