@@ -4,7 +4,8 @@ workflow "shell commands & shaking finger" {
     "post gif on fail",
     "benchmark",
     "test",
-    "build.docker"
+    "build.docker",
+    "docker.login"
   ]
 }
 
