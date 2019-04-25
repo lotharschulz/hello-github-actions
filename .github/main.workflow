@@ -1,6 +1,6 @@
 workflow "shell commands & shaking finger" {
   on = "pull_request"
-  resolves = ["shell"]
+  resolves = ["shell","post gif on fail" ]
 }
 
 action "shell" {
@@ -11,5 +11,4 @@ action "shell" {
 action "post gif on fail" {
   uses = "jessfraz/shaking-finger-action@master"
   secrets = ["GITHUB_TOKEN"]
-  needs = ["shell"]
 }
