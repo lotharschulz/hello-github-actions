@@ -31,7 +31,7 @@ action "docker.build" {
 }
 
 action "docker.login" {
-  uses = "actions/docker/login@8cdf801b322af5f369e00d85e9cf3a7122f49108"
+  uses = "actions/docker/login@master"
   secrets = ["DOCKER_USERNAME", "DOCKER_PASSWORD"]
   needs = ["docker.build"]
 }
