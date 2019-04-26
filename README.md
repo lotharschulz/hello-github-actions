@@ -1,6 +1,6 @@
 # Hello github actions
 
-This is my playground repository for [github actions](https://github.com/features/actions). 
+This is my playground repository for [GitHub actions](https://github.com/features/actions). 
 
 This one contains one action that
 - build a go binary
