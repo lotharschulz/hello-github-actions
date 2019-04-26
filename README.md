@@ -1,4 +1,4 @@
-# Hello github actions
+# Hello GitHub actions
 
 This is my playground repository for [GitHub actions](https://github.com/features/actions). 
 
