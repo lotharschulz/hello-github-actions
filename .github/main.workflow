@@ -1,5 +1,8 @@
 workflow "shell commands & shaking finger" {
   on = "pull_request"
+  env = {
+    DOCKER_IMAGE  = "lotharschulz/hello-github-actions"
+  }
   resolves = [
     "post gif on fail",
     "benchmark",
