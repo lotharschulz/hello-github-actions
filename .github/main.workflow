@@ -1,4 +1,4 @@
-workflow "shell commands & shaking finger" {
+workflow "build, test, benchmark, docker build/push & shaking finger" {
   on = "pull_request"
   resolves = [
     "post gif on fail",
