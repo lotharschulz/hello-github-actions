@@ -9,7 +9,7 @@ This one contains one action that
 - builds a docker image
 - logs in to docker hub
 - pushes the created docker image to dockerhub
-- adds a [shaking finger](https://github.com/jessfraz/shaking-finger-action) to a pull request in case an [action](https://developer.github.com/actions/creating-github-actions/creating-a-new-action/) fails
+- adds a [shaking finger](https://github.com/jessfraz/shaking-finger-action#usage) to a pull request in case an [action](https://developer.github.com/actions/creating-github-actions/creating-a-new-action/) fails
 
 
 ![build, test, benchmark, docker build/push & shaking finger](build_test_benchmark_docker_build_push_and_shaking_finger.png) 
