@@ -1,6 +1,6 @@
 # Hello github actions
 
-This is a show case repository for (github actions)[https://github.com/features/actions]. 
+This is a show case repository for [github actions](https://github.com/features/actions). 
 
 This one contains an action: ![build, test, benchmark, docker build/push & shaking finger](build_test_benchmark_docker_build_push_and_shaking_finger.png) 
 
