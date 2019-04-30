@@ -5,6 +5,7 @@
 # http://redsymbol.net/articles/unofficial-bash-strict-mode/
 set -euo pipefail
 IFS=$'\n\t'
+NEUTRALCODE=78
 
 for cmd in "$@"; do
     echo "Running '$cmd'..."
@@ -13,7 +14,7 @@ for cmd in "$@"; do
         echo "Successfully ran '$cmd'"
     else
         exit_code=$?
-        echo "Failure running '$cmd', exited with $exit_code. Action will return 78 'neutral'."
-        exit 78
+        echo "Failure running '$cmd', exited with $exit_code. Action will return $NEUTRALCODE 'neutral'."
+        exit $NEUTRALCODE
     fi
 done
