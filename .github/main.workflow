@@ -10,7 +10,7 @@ workflow "build, test, benchmark, docker build/push & shaking finger" {
 }
 
 action "test" {
-  uses = "lotharschulz/hello-github-actions/action@master"
+  uses = "lotharschulz/hello-github-actions/action/DockerfileSuccessNeutral@master"
   args = ["make test"]
 }
 
