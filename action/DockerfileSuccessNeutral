@@ -9,6 +9,6 @@ LABEL "com.github.actions.description"="Runs one or more golang / make / bash co
 LABEL "com.github.actions.icon"="terminal"
 LABEL "com.github.actions.color"="blue"
 
-COPY entrypoint.sh /entrypoint.sh
+COPY entrypointSuccessNeutral.sh /entrypointSuccessNeutral.sh
 
 ENTRYPOINT ["/entrypointSuccessNeutral.sh"]
