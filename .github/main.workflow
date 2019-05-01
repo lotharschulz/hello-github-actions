@@ -15,7 +15,7 @@ action "test" {
 }
 
 action "benchmark" {
-  uses = "lotharschulz/hello-github-actions/action@master"
+  uses = "lotharschulz/hello-github-actions/action-neutral@master"
   args = ["make benchmark"]
 }
 
