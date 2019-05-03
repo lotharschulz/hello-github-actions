@@ -1,6 +1,9 @@
 workflow "Build" {
   on = "push"
-  resolves = ["build:release", "build:debug"]
+  resolves = [
+    "build:release",
+    "file listings",
+  ]
 }
 
 action "settings" {
@@ -24,4 +27,10 @@ action "build:debug" {
   env = {
     BUILD_TYPE = "Debug"
   }
+}
+
+action "file listings" {
+  uses = "./action"
+  needs = ["build:debug", "build:release"]
+  runs = "ls -lisa"
 }
