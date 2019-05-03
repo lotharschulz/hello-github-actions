@@ -6,7 +6,7 @@ workflow "Build" {
 action "settings" {
   uses = "grisumbras/store-env@master"
   env = {
-    CC = "/opt/bin/cc""
+    CC = "/opt/bin/cc"
   }
 }
 
