@@ -4,7 +4,7 @@ workflow "build, test, benchmark, docker build/push & shaking finger" {
     "test",
     "benchmark",
     "post gif on fail",
-#    "globalsettings",
+    "globalsettings",
 #    "list",
     "docker.build",
     "docker.push",
@@ -26,13 +26,13 @@ action "post gif on fail" {
   secrets = ["GITHUB_TOKEN"]
 }
 
-# action "globalsettings" {
-#   uses = "grisumbras/store-env@master"
-#   env = {
-#     CC = "/opt/bin/cc"
-#   }
-#   needs = ["test"]
-# }
+action "globalsettings" {
+  uses = "grisumbras/store-env@master"
+  env = {
+    IMAGE="lotharschulz/hello-github-actions:$GITHUB_SHA"
+  }
+  needs = ["test"]
+}
 
 # action "list" {
 #   uses = "lotharschulz/hello-github-actions/action@master"
@@ -42,7 +42,7 @@ action "post gif on fail" {
 
 action "docker.build" {
   uses = "actions/docker/cli@master"
-  args = "build -t lotharschulz/hello-github-actions2:$GITHUB_SHA ."
+  args = "build -t lotharschulz/hello-github-actions:$GITHUB_SHA ."
   needs = ["test"]
 #  needs = ["list"]
 }
@@ -57,5 +57,5 @@ action "docker.push" {
   uses = "actions/docker/cli@master"
   needs = ["docker.login"]
   secrets = ["GITHUB_TOKEN", "DOCKER_PASSWORD", "DOCKER_USERNAME"]
-  args = "push lotharschulz/hello-github-actions2:$GITHUB_SHA"
+  args = "push lotharschulz/hello-github-actions:$GITHUB_SHA"
 }
