@@ -36,7 +36,7 @@ action "globalsettings" {
 
 action "list" {
   uses = "lotharschulz/hello-github-actions/action@master"
-  args = ["tree"]
+  args = ["ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"]
   needs = ["globalsettings"]
 }
 
