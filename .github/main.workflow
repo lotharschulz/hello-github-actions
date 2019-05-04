@@ -5,6 +5,7 @@ workflow "build, test, benchmark, docker build/push & shaking finger" {
     "benchmark",
     "post gif on fail",
     "globalsettings",
+    "list",
     "docker.build",
     "docker.push",
   ]
@@ -33,10 +34,16 @@ action "globalsettings" {
   needs = ["test"]
 }
 
+action "list" {
+  uses = "lotharschulz/hello-github-actions/action@master"
+  args = ["ls -lisa"]
+  needs = ["globalsettings"]
+}
+
 action "docker.build" {
   uses = "actions/docker/cli@master"
   args = "build --rm -t lotharschulz/hello-github-actions:$GITHUB_SHA ."
-  needs = ["test"]
+  needs = ["list"]
 }
 
 action "docker.login" {
