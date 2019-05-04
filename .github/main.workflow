@@ -36,13 +36,13 @@ action "globalsettings" {
 
 action "list" {
   uses = "lotharschulz/hello-github-actions/action@master"
-  args = ["ls -lisa"]
+  args = ["tree"]
   needs = ["globalsettings"]
 }
 
 action "docker.build" {
   uses = "actions/docker/cli@master"
-  args = "build --rm -t lotharschulz/hello-github-actions:$GITHUB_SHA ."
+  args = "build --rm -t lotharschulz/hello-github-actions2:$GITHUB_SHA ."
   needs = ["list"]
 }
 
@@ -56,5 +56,5 @@ action "docker.push" {
   uses = "actions/docker/cli@master"
   needs = ["docker.login"]
   secrets = ["GITHUB_TOKEN", "DOCKER_PASSWORD", "DOCKER_USERNAME"]
-  args = "push lotharschulz/hello-github-actions:$GITHUB_SHA"
+  args = "push lotharschulz/hello-github-actions2:$GITHUB_SHA"
 }
