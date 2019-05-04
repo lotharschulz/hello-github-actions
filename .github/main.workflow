@@ -41,7 +41,8 @@ action "globalsettings" {
 # }
 
 action "docker.build" {
-  uses = "actions/docker/cli@master"
+#  uses = "actions/docker/cli@master"
+  uses = "lotharschulz/hello-github-actions/docker/cli@master"
   args = "build -t lotharschulz/hello-github-actions:$GITHUB_SHA ."
   needs = ["globalsettings"]
 #  needs = ["list"]
