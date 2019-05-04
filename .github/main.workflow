@@ -36,7 +36,7 @@ action "globalsettings" {
 
 action "list" {
   uses = "lotharschulz/hello-github-actions/action@master"
-  args = ["ls -R"]
+  args = ["ls -aR"]
   needs = ["globalsettings"]
 }
 
