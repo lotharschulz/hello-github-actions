@@ -1,9 +1,10 @@
 workflow "build, test, benchmark, docker build/push & shaking finger" {
   on = "pull_request"
   resolves = [
-    "post gif on fail",
-    "benchmark",
     "test",
+    "benchmark",
+    "post gif on fail",
+    "globalsettings",
     "docker.build",
     "docker.push",
   ]
@@ -22,6 +23,14 @@ action "benchmark" {
 action "post gif on fail" {
   uses = "jessfraz/shaking-finger-action@master"
   secrets = ["GITHUB_TOKEN"]
+}
+
+action "globalsettings" {
+  uses = "grisumbras/store-env@master"
+  env = {
+    CC = "/opt/bin/cc"
+  }
+  needs = ["test"]
 }
 
 action "docker.build" {
