@@ -43,7 +43,7 @@ action "globalsettings" {
 action "docker.build" {
   uses = "actions/docker/cli@master"
   args = "build -t lotharschulz/hello-github-actions:$GITHUB_SHA ."
-  needs = ["test"]
+  needs = ["globalsettings"]
 #  needs = ["list"]
 }
 
