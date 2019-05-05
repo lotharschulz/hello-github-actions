@@ -6,6 +6,9 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+echo "action entrypoint"
+echo "$@"
+
 for cmd in "$@"; do
     echo "Running '$cmd'..."
     if sh -c "$cmd"; then
