@@ -26,13 +26,13 @@ action "post gif on fail" {
   secrets = ["GITHUB_TOKEN"]
 }
 
-action "globalsettings" {
-  uses = "grisumbras/store-env@master"
-  env = {
-    IMAGE="lotharschulz/hello-github-actions:$GITHUB_SHA"
-  }
-  needs = ["test"]
-}
+# action "globalsettings" {
+#   uses = "grisumbras/store-env@master"
+#   env = {
+#     IMAGE="lotharschulz/hello-github-actions:$GITHUB_SHA"
+#   }
+#   needs = ["test"]
+# }
 
 # action "list" {
 #   uses = "lotharschulz/hello-github-actions/action@master"
@@ -44,7 +44,8 @@ action "docker.build" {
 #  uses = "actions/docker/cli@master"
   uses = "lotharschulz/hello-github-actions/docker/cli@master"
   args = "build -t lotharschulz/hello-github-actions:$GITHUB_SHA ."
-  needs = ["globalsettings"]
+#  needs = ["globalsettings"]
+  needs = ["test"]
 #  needs = ["list"]
 }
 
