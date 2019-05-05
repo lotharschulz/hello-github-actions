@@ -6,7 +6,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-echo "action entrypoint"
+echo "action entrypoint testbranchA"
 echo "$@"
 
 for cmd in "$@"; do
