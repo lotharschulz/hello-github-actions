@@ -4,7 +4,7 @@ workflow "build, test, benchmark, docker build/push & shaking finger" {
     "test",
     "benchmark",
     "post gif on fail",
-    "globalsettings",
+#    "globalsettings",
 #    "list",
     "docker.build",
     "docker.push",
