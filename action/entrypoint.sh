@@ -6,9 +6,6 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-#echo "docker cli entrypoint master"
-#echo "$*"
-
 for cmd in "$@"; do
     echo "Running '$cmd'..."
     if sh -c "$cmd"; then
