@@ -1,9 +1,9 @@
 # Hello GitHub actions
 
-This is my playground repository for [GitHub actions](https://github.com/features/actions). 
+[GitHub actions](https://github.com/features/actions) Playground. 
 
-This one contains one action that
-- build a go binary
+This repository contains one action that
+- builds a go binary
 - tests the go code
 - benchmarks the go code
 - builds a docker image
@@ -15,6 +15,10 @@ This one contains one action that
 ![build, test, benchmark, docker build/push & shaking finger](build_test_benchmark_docker_build_push_and_shaking_finger.png) 
 
 All that is mainly defined in _[main.workflow](github/main.workflow) file_.
+
+## Blog Post
+
+**[CI/CD with GitHub Actions](https://www.lotharschulz.info/2019/05/09/ci-cd-with-github-actions/)**
 
 ## make file targets
 
@@ -43,7 +47,3 @@ make build.docker
 ```
 make clean
 ```
-
-## Blog Post
-
-[CI/CD with GitHub Actions](https://www.lotharschulz.info/2019/05/09/ci-cd-with-github-actions/)
