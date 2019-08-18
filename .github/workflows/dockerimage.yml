@@ -31,6 +31,33 @@ jobs:
             goos: darwin
     runs-on: ${{ matrix.os }}
     steps:
+
+    # https://help.github.com/en/articles/contexts-and-expression-syntax-for-github-actions#example-printing-context-information-to-the-log-file @ 2019 08 18
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
+    - name: Dump strategy context
+      env:
+        STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+      run: echo "$STRATEGY_CONTEXT"
+    - name: Dump matrix context
+      env:
+        MATRIX_CONTEXT: ${{ toJson(matrix) }}
+      run: echo "$MATRIX_CONTEXT"
+    - name: Dump job context
+      env:
+        JOB_CONTEXT: ${{ toJson(job) }}
+      run: echo "$JOB_CONTEXT"
+    - name: Dump runner context
+      env:
+        RUNNER_CONTEXT: ${{ toJson(runner) }}
+      run: echo "$RUNNER_CONTEXT"
+    - name: Dump steps context
+      env:
+        STEPS_CONTEXT: ${{ toJson(steps) }}
+      run: echo "$STEPS_CONTEXT"
+
     - uses: actions/checkout@v1
     - name: builds the binary
       #run: CGO_ENABLED=0 GOOS=${GOOS} ${GOBUILD} -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o ${BINARY_NAME} .
@@ -41,7 +68,7 @@ jobs:
         BINARY_NAME: hello_world
 
     - uses: actions/docker/login@master
-      if: ${{ matrix.os }} == 'ubuntu-18.04'
+    #  if: ${{ matrix.os }} == 'ubuntu-18.04'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
