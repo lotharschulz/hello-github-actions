@@ -67,8 +67,16 @@ jobs:
         GOBUILD: go build
         BINARY_NAME: hello_world
 
+    if: matrix.os == 'ubuntu-18.04'
+    # build docker image
     - uses: actions/docker/login@master
-      if: matrix.os == 'ubuntu-18.04'
+    #  if: matrix.os == 'ubuntu-18.04'
+      env:
+        ARGS: "build -t lotharschulz/hello-github-actions:$GITHUB_SHA ."
+
+    # push docker image to dockerhub
+    - uses: actions/docker/login@master
+    #  if: matrix.os == 'ubuntu-18.04'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
