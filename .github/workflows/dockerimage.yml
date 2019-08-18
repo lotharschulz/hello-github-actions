@@ -68,7 +68,7 @@ jobs:
         BINARY_NAME: hello_world
 
     - uses: actions/docker/login@master
-    #  if: ${{ matrix.os }} == 'ubuntu-18.04'
+      if: matrix.os == 'ubuntu-18.04'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
