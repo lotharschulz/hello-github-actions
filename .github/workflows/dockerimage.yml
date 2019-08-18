@@ -38,7 +38,7 @@ jobs:
   login:
     needs: build
  
-    #runs-on: ubuntu-18.04
+    runs-on: ubuntu-18.04
     steps:
     - name: login to dockerhub
     - uses: actions/docker/login@v1
