@@ -1,0 +1,59 @@
+name: Docker Image CI/CD
+
+on: [push, pull_request]
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: benchmarks the go code
+      run: make benchmark
+
+  test:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: tests the code
+      run: make test
+
+  build:
+    needs: [benchmark, test]
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macOS-10.14, ubuntu-18.04]
+        goos: [linux, darwin]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v1
+    - name: builds the binary
+      #run: CGO_ENABLED=0 GOOS=${GOOS} ${GOBUILD} -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o ${BINARY_NAME} .
+      run: CGO_ENABLED=0 GOOS=${{ matrix.goos }} ${GOBUILD} -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o ${BINARY_NAME} .
+      env:
+        GOOS: linux # darwin
+        GOBUILD: go build
+        BINARY_NAME: hello_world
+
+  login:
+    needs: build
+ 
+    #runs-on: ubuntu-18.04
+    steps:
+    - name: login to dockerhub
+    - uses: actions/docker/login@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.DOCKER_USERNAME }}
+        GITHUB_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
+
+  push:
+    needs: login
+ 
+    runs-on: ubuntu-18.04
+    steps:
+    - name: pushes docker image to docker hub
+    - uses: actions/docker/login@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.DOCKER_USERNAME }}
+        GITHUB_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
+        ARGS: "push lotharschulz/hello-github-actions:${{ github.sha }}"
