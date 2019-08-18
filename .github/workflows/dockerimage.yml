@@ -70,6 +70,7 @@ jobs:
     - uses: actions/docker/cli@master
     #- name: builds the docker image
       if: matrix.os == 'ubuntu-18.04'
+      run: echo "before build -t"
       env:
         ARGS: "build -t lotharschulz/hello-github-actions:${{ github.sha }} ."
 
