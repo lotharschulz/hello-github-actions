@@ -40,7 +40,6 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/docker/login@master
-    - name: login to dockerhub
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -51,7 +50,6 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/docker/login@master
-    - name: pushes docker image to docker hub
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
