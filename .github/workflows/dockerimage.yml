@@ -73,7 +73,7 @@ jobs:
     - name: builds the docker image
       if: matrix.os == 'ubuntu-18.04'
       env:
-        ARGS: "build -t lotharschulz/hello-github-actions:$GITHUB_SHA ."
+        ARGS: "build -t lotharschulz/hello-github-actions:${{ github.sha }} ."
 
     # push docker image to dockerhub
     - uses: actions/docker/login@master
