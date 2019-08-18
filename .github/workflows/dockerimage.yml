@@ -41,6 +41,8 @@ jobs:
         BINARY_NAME: hello_world
 
     - uses: actions/docker/login@master
+    - name: push to docker hub
+    # github example: if: github.event_name == 'pull_request' && github.event.action == 'unassigned'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
