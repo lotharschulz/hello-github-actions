@@ -45,7 +45,7 @@ jobs:
 #        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
   dockerhub-push:
-    needs: dockerhub-login
+#    needs: dockerhub-login
  
     runs-on: ubuntu-18.04
     steps:
