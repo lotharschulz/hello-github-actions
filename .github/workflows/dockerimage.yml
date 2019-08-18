@@ -17,7 +17,7 @@ jobs:
     - name: tests the code
       run: make test
 
-  build:
+  build-and-dockerhub-push:
     needs: [benchmark, test]
     strategy:
       fail-fast: false
@@ -35,6 +35,13 @@ jobs:
         GOBUILD: go build
         BINARY_NAME: hello_world
 
+    - uses: actions/docker/login@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        ARGS: "push lotharschulz/hello-github-actions:${{ github.sha }}"
+
 #  dockerhub-login:
 #   needs: build
 #    runs-on: ubuntu-18.04
@@ -44,14 +51,14 @@ jobs:
 #        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
 #        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
-  dockerhub-push:
+#  dockerhub-push:
 #    needs: dockerhub-login
  
-    runs-on: ubuntu-18.04
-    steps:
-    - uses: actions/docker/login@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        ARGS: "push lotharschulz/hello-github-actions:${{ github.sha }}"
+#    runs-on: ubuntu-18.04
+#    steps:
+#    - uses: actions/docker/login@master
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+#        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+#        ARGS: "push lotharschulz/hello-github-actions:${{ github.sha }}"
