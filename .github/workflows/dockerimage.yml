@@ -35,25 +35,25 @@ jobs:
         GOBUILD: go build
         BINARY_NAME: hello_world
 
-  login:
-    needs: build
- 
-    runs-on: ubuntu-18.04
-    steps:
-    - name: login to dockerhub
-    - uses: actions/docker/login@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.DOCKER_USERNAME }}
-        GITHUB_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
+#  login:
+#    needs: build
+# 
+#    runs-on: ubuntu-18.04
+#    steps:
+#    - name: login to dockerhub
+#    - uses: actions/docker/login@v1
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.DOCKER_USERNAME }}
+#        GITHUB_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
 
-  push:
-    needs: login
+#  push:
+#    needs: login
  
-    runs-on: ubuntu-18.04
-    steps:
-    - name: pushes docker image to docker hub
-    - uses: actions/docker/login@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.DOCKER_USERNAME }}
-        GITHUB_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
-        ARGS: "push lotharschulz/hello-github-actions:${{ github.sha }}"
+#    runs-on: ubuntu-18.04
+#    steps:
+#    - name: pushes docker image to docker hub
+#    - uses: actions/docker/login@v1
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.DOCKER_USERNAME }}
+#        GITHUB_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
+#        ARGS: "push lotharschulz/hello-github-actions:${{ github.sha }}"
