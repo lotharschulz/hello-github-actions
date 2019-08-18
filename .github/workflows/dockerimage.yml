@@ -67,9 +67,8 @@ jobs:
         GOBUILD: go build
         BINARY_NAME: hello_world
 
-    #if: matrix.os == 'ubuntu-18.04'
     # build docker image
-    - uses: actions/docker/login@master
+    - uses: actions/docker/cli@master
     #- name: builds the docker image
       if: matrix.os == 'ubuntu-18.04'
       env:
@@ -84,6 +83,8 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         ARGS: "push lotharschulz/hello-github-actions:${{ github.sha }}"
+
+###############################################
 
 #  dockerhub-login:
 #   needs: build
