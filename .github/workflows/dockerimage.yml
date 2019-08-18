@@ -35,14 +35,14 @@ jobs:
         GOBUILD: go build
         BINARY_NAME: hello_world
 
-  dockerhub-login:
-    needs: build
-    runs-on: ubuntu-18.04
-    steps:
-    - uses: actions/docker/login@master
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+#  dockerhub-login:
+#   needs: build
+#    runs-on: ubuntu-18.04
+#    steps:
+#    - uses: actions/docker/login@master
+#      env:
+#        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+#        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
   dockerhub-push:
     needs: dockerhub-login
