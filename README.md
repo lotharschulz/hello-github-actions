@@ -2,7 +2,7 @@
 
 ## CI/CD with Github actions V2 (August 2019)
 
-[Since August 8th 2019 GitHub Actions includes built-in CI/CD](https://twitter.com/github/status/1159511691480260608). Version 2 of this repository is doing the same CI/CD workflow as with version 1 <sup>[1](https://www.lotharschulz.info/2019/05/09/ci-cd-with-github-actions/), [2](https://twitter.com/lothar_schulz/status/1159513737142898689), [3](https://www.linkedin.com/posts/lotharschulz_github-actions-now-with-built-in-cicd-happily-activity-6565279455458152448-ECh1) </sup>
+[Since August 8th 2019 GitHub Actions includes built-in CI/CD](https://twitter.com/github/status/1159511691480260608). Version 2 of this repository is executing the same CI/CD workflow as the first version <sup>[1](https://www.lotharschulz.info/2019/05/09/ci-cd-with-github-actions/), [2](https://twitter.com/lothar_schulz/status/1159513737142898689), [3](https://www.linkedin.com/posts/lotharschulz_github-actions-now-with-built-in-cicd-happily-activity-6565279455458152448-ECh1) </sup>.
 
 
 ## CI/CD with Github actions V1 (May 2019)
