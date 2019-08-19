@@ -66,32 +66,15 @@ jobs:
         GOBUILD: go build
         BINARY_NAME: hello_world
 
-    #- uses: actions/docker/cli@master
-    #- name: builds the docker image
-    #  if: matrix.os == 'ubuntu-18.04'
-    #  run: echo "before build -t"
-    #  env:
-    #    ARGS: "build -t lotharschulz/hello-github-actions:${{ github.sha }} ."
-
-    # build docker image and push
     - uses: actions/checkout@master
-    - name: docker build and docker hub login & push
+    - name: docker build image and docker hub login & push
       if: matrix.os == 'ubuntu-18.04'
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
-        docker build -t lotharschulz/hello-github-actions:${{ github.sha }} .
+        d=$(date +%Y-%m-%d)
+        docker build -t lotharschulz/hello-github-actions:$d-${{ matrix.os }}-${{ github.sha }} .
         docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
-        docker push lotharschulz/hello-github-actions:${{ github.sha }}
+        docker push lotharschulz/hello-github-actions:$d-${{ matrix.os }}-${{ github.sha }}
         # inspired by https://gist.github.com/jonico/e18127b487d198606e31aac669262af8 @ 2019 98 19
-
-#    # push docker image to dockerhub
-#    - uses: actions/docker/login@master
-#    #- name: push docker to dockerhub
-#      if: matrix.os == 'ubuntu-18.04'
-#      env:
-#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-#        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-#        ARGS: "push lotharschulz/hello-github-actions:${{ github.sha }}"
