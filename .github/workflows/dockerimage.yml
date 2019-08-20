@@ -1,4 +1,4 @@
-name: Docker Image CI/CD
+name: CI/CD Docker & Dockerhub with actions v2
 
 on: push # [push, pull_request]
 
