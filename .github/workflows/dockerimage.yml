@@ -60,21 +60,18 @@ jobs:
 
     - uses: actions/checkout@v1
     - name: builds the binary
-      run: CGO_ENABLED=0 GOOS=${{ matrix.goos }} ${GOBUILD} -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o ${BINARY_NAME}${{ matrix.os }}${{ matrix.goos }} .
-      env:
-        GOOS: linux # darwin
-        GOBUILD: go build
-        BINARY_NAME: hello_world
+      run: CGO_ENABLED=0 GOOS=${{ matrix.goos }} go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hello_world${{ matrix.os }}${{ matrix.goos }} .
 
     - uses: actions/checkout@master
-    - name: docker build image and docker hub login & push
+    - name: if linux -> docker build image and docker hub login & push
       if: matrix.os == 'ubuntu-18.04'
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
-        d=$(date +%Y-%m-%d)
-        docker build -t lotharschulz/hello-github-actions:$d-${{ matrix.os }}-${{ github.sha }} .
-        docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
-        docker push lotharschulz/hello-github-actions:$d-${{ matrix.os }}-${{ github.sha }}
         # inspired by https://gist.github.com/jonico/e18127b487d198606e31aac669262af8 @ 2019 98 19
+        d=$(date +%Y-%m-%d)
+        tag=$d-${{ matrix.os }}-${{ github.sha }}
+        docker build -t lotharschulz/hello-github-actions:$tag .
+        docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+        docker push lotharschulz/hello-github-actions:$tag
