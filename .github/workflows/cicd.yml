@@ -1,0 +1,77 @@
+name: CI/CD Docker & Dockerhub with actions v2
+
+on: push # [push, pull_request]
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: benchmarks the go code
+      run: make benchmark
+
+  test:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: tests the code
+      run: make test
+
+  build-and-dockerhub-push-if-linux:
+    needs: [benchmark, test]
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macOS-10.14, ubuntu-18.04]
+        goos: [linux, darwin]
+        exclude:
+          - os: macOS-10.14
+            goos: linux
+          - os: ubuntu-18.04
+            goos: darwin
+    runs-on: ${{ matrix.os }}
+    steps:
+
+    # https://help.github.com/en/articles/contexts-and-expression-syntax-for-github-actions#example-printing-context-information-to-the-log-file @ 2019 08 18
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
+    - name: Dump strategy context
+      env:
+        STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+      run: echo "$STRATEGY_CONTEXT"
+    - name: Dump matrix context
+      env:
+        MATRIX_CONTEXT: ${{ toJson(matrix) }}
+      run: echo "$MATRIX_CONTEXT"
+    - name: Dump job context
+      env:
+        JOB_CONTEXT: ${{ toJson(job) }}
+      run: echo "$JOB_CONTEXT"
+    - name: Dump runner context
+      env:
+        RUNNER_CONTEXT: ${{ toJson(runner) }}
+      run: echo "$RUNNER_CONTEXT"
+    - name: Dump steps context
+      env:
+        STEPS_CONTEXT: ${{ toJson(steps) }}
+      run: echo "$STEPS_CONTEXT"
+
+    - uses: actions/checkout@v1
+    - name: builds the binary
+      run: CGO_ENABLED=0 GOOS=${{ matrix.goos }} go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hello_world${{ matrix.os }}${{ matrix.goos }} .
+
+    - uses: actions/checkout@master
+    - name: if linux -> docker build image and docker hub login & push
+      if: matrix.os == 'ubuntu-18.04'
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        # inspired by https://gist.github.com/jonico/e18127b487d198606e31aac669262af8 @ 2019 98 19
+        d=$(date +%Y-%m-%d)
+        tag=$d-${{ matrix.os }}-${{ github.sha }}
+        docker build -t lotharschulz/hello-github-actions:$tag .
+        docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+        docker push lotharschulz/hello-github-actions:$tag

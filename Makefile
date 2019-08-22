@@ -3,7 +3,12 @@ GOBUILD       		=$(GOCMD) build
 GOCLEAN       		=$(GOCMD) clean
 GOTEST        		=$(GOCMD) test
 GOGET         		=$(GOCMD) get
+
+GOOSL				=linux
+GOOSD				=darwin
+
 BINARY_NAME   		=hello_world
+BINARY_NAME_DARWIN	=hello_world_d
 
 GOPKGS        		=$(shell go list ./... | grep -v /vendor/)
 VERSION       		?=$(shell git describe --tags --always --dirty)-$(shell /bin/date "+%Y%m%d%H%M%S")
@@ -13,9 +18,13 @@ DOCKERFILE_FOLDER	?= .
 DOCKER_BASE_IMAGE	=lotharschulz/hello-github-actions
 DOCKER_IMAGE		=$(DOCKER_BASE_IMAGE):$(VERSION)
 
-#build static linked binary
+#build static linked binary linux
 build: 
-		CGO_ENABLED=0 GOOS=linux $(GOBUILD) -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o $(BINARY_NAME) .
+		CGO_ENABLED=0 GOOS=$(GOOSL) $(GOBUILD) -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o $(BINARY_NAME) .
+
+#build static linked binary darwin
+build-darwin: 
+		CGO_ENABLED=0 GOOS=$(GOOSD) $(GOBUILD) -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o $(BINARY_NAME_DARWIN) .
 
 # test
 test: 
