@@ -23,12 +23,12 @@ jobs:
       fail-fast: false
       matrix:
         os: [macOS-10.14, ubuntu-18.04]
-        #goos: [linux, darwin]
-        #exclude:
-        #  - os: macOS-10.14
-        #    goos: linux
-        #  - os: ubuntu-18.04
-        #    goos: darwin
+        goos: [linux, darwin]
+        exclude:
+          - os: macOS-10.14
+            goos: linux
+          - os: ubuntu-18.04
+            goos: darwin
     runs-on: ${{ matrix.os }}
     steps:
 
@@ -59,14 +59,8 @@ jobs:
       run: echo "$STEPS_CONTEXT"
 
     - uses: actions/checkout@v1
-    - name: builds the binary on linux
-      if: matrix.os == 'ubuntu-18.04'
-      run: CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hello_world${{ matrix.os }}${{ matrix.goos }} .
-
-    - uses: actions/checkout@v1
-    - name: builds the binary on mac
-      if: matrix.os == 'macOS-10.14'
-      run: CGO_ENABLED=0 GOOS=darwin go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hello_world${{ matrix.os }}${{ matrix.goos }} .
+    - name: builds the binary
+      run: CGO_ENABLED=0 GOOS=${{ matrix.goos }} go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hello_world${{ matrix.os }}${{ matrix.goos }} .
 
     - uses: actions/checkout@master
     - name: if linux -> docker build image and docker hub login & push
