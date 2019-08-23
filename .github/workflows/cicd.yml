@@ -24,11 +24,16 @@ jobs:
       matrix:
         os: [macOS-10.14, ubuntu-18.04]
         goos: [linux, darwin]
-        exclude:
-          - os: macOS-10.14
-            goos: linux
-          - os: ubuntu-18.04
-            goos: darwin
+        include:
+        - os: macOS-10.14
+          goos: darwin
+        - os: ubuntu-18.04
+          goos: linux
+        #exclude:
+        #  - os: macOS-10.14
+        #    goos: linux
+        #  - os: ubuntu-18.04
+        #    goos: darwin
     runs-on: ${{ matrix.os }}
     steps:
 
@@ -69,7 +74,7 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
-        # inspired by https://gist.github.com/jonico/e18127b487d198606e31aac669262af8 @ 2019 98 19
+        # inspired by https://gist.github.com/jonico/e18127b487d198606e31aac669262af8 @ 2019 08 19
         d=$(date +%Y-%m-%d)
         tag=$d-${{ matrix.os }}-${{ github.sha }}
         docker build -t lotharschulz/hello-github-actions:$tag .
