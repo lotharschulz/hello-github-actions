@@ -25,10 +25,10 @@ jobs:
         os: [macOS-10.14, ubuntu-18.04]
         goos: [linux, darwin]
         include:
-        - os: macOS-10.14
-          goos: darwin
-        - os: ubuntu-18.04
-          goos: linux
+          - os: macOS-10.14
+            goos: darwin
+          - os: ubuntu-18.04
+            goos: linux
         #exclude:
         #  - os: macOS-10.14
         #    goos: linux
