@@ -24,16 +24,16 @@ jobs:
       matrix:
         os: [macOS-10.14, ubuntu-18.04]
         goos: [linux, darwin]
-        include:
-          - os: macOS-10.14
-            goos: darwin
-          - os: ubuntu-18.04
-            goos: linux
-        #exclude:
+        #include:
         #  - os: macOS-10.14
-        #    goos: linux
-        #  - os: ubuntu-18.04
         #    goos: darwin
+        #  - os: ubuntu-18.04
+        #    goos: linux
+        exclude:
+          - os: macOS-10.14
+            goos: linux
+          - os: ubuntu-18.04
+            goos: darwin
     runs-on: ${{ matrix.os }}
     steps:
 
