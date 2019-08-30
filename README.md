@@ -5,9 +5,9 @@
 [Since August 8th 2019 _GitHub Actions includes built-in CI/CD_](https://twitter.com/github/status/1159511691480260608). Version 2 of this repository is executing the same CI/CD workflow as the first version <sup>[1](https://www.lotharschulz.info/2019/05/09/ci-cd-with-github-actions/), [2](https://twitter.com/lothar_schulz/status/1159513737142898689), [3](https://www.linkedin.com/posts/lotharschulz_github-actions-now-with-built-in-cicd-happily-activity-6565279455458152448-ECh1) </sup>.
 
 
-This repository contains one version2 action that
-- tests the go code
-- benchmarks the go code
+This repository contains one version2 workflow to
+- test the go code
+- benchmark the go code
 - builds a docker image & uploads it to dockerhub
 All that is defined in _[cicd.yml](.github/workflows/cicd.yml) file_.
 
