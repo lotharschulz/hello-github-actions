@@ -11,6 +11,8 @@ This repository contains one version2 action that
 - builds a docker image & uploads it to dockerhub
 All that is defined in _[cicd.yml](.github/workflows/cicd.yml) file_.
 
+![test, benchmark, docker build/push](screenshot2019-08-23--12.17.35.png) 
+
 ## Blog Post
 
 **[CI/CD with GitHub Actions v2](https://www.lotharschulz.info/2019/08/xx/ci-cd-with-github-actions-v2/)**
