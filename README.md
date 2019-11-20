@@ -22,7 +22,7 @@ All that is defined in _[cicd.yml](.github/workflows/cicd.yml) file_.
 
 
 
-## Version 2: CI/CD with Github actions (May 2019)
+## outdated Version 1: CI/CD with Github actions (May 2019)
 
 [GitHub actions](https://github.com/features/actions) Playground. 
 
