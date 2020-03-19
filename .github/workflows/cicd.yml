@@ -64,7 +64,7 @@ jobs:
 
     - uses: actions/checkout@master
     - name: if linux -> docker build image and docker hub login & push
-      if: matrix.os == 'ubuntu-18.04'
+      #if: matrix.os == 'ubuntu-18.04'
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
