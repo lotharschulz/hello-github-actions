@@ -75,3 +75,6 @@ jobs:
         docker build -t lotharschulz/hello-github-actions:$tag .
         docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
         docker push lotharschulz/hello-github-actions:$tag
+      else:
+      run: |
+        echo "no docker push"
