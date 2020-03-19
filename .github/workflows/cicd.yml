@@ -63,8 +63,8 @@ jobs:
       run: CGO_ENABLED=0 GOOS=${{ matrix.goos }} go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hello_world${{ matrix.os }}${{ matrix.goos }} .
 
     - uses: actions/checkout@master
-    - name: if linux -> docker build image and docker hub login & push
-      #if: matrix.os == 'ubuntu-18.04'
+    - name: if linux build docker image and docker hub login & push
+      if: matrix.os == 'ubuntu-18.04'
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
