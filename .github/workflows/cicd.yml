@@ -190,9 +190,10 @@ jobs:
 
   build_docker_and_push_to_github_packages2:
     needs: [benchmark, test]
-    name: Push Docker image to GitHub Packages via Docker Commands
     runs-on: ubuntu-20.04
     steps:
+      - uses: actions/checkout@v1
+      - name: Push Docker image to GitHub Packages via Docker Commands
       env:
         DOCKER_USERNAME: ${{ github.actor }}
         DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
