@@ -24,11 +24,11 @@ jobs:
       matrix:
         os: [macOS-10.15, ubuntu-18.04]
         goos: [linux, darwin]
-        exclude:
-          - os: macOS-10.15
-            goos: linux
-          - os: ubuntu-18.04
-            goos: darwin
+#        exclude:
+#          - os: macOS-10.15
+#            goos: linux
+#          - os: ubuntu-18.04
+#            goos: darwin
     runs-on: ${{ matrix.os }}
     steps:
 
