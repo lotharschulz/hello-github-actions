@@ -193,6 +193,7 @@ jobs:
     name: Push Docker image to GitHub Packages using via docker cli commands
     runs-on: ubuntu-20.04
     steps:
+      - name: Build and Push
       - uses: actions/checkout@v1
         env:
           DOCKER_USERNAME: ${{ github.actor }}
