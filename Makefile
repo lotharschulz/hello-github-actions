@@ -2,7 +2,6 @@ GOCMD         		=go
 GOBUILD       		=$(GOCMD) build
 GOCLEAN       		=$(GOCMD) clean
 GOTEST        		=$(GOCMD) test
-GOGET         		=$(GOCMD) get
 
 GOOSL				=linux
 GOOSD				=darwin
