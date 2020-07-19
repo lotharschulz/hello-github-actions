@@ -1,18 +1,34 @@
-name: CI/CD Docker & Dockerhub with actions v2
+name: Publish to Dockerhub and GitHub packages
 
 on: push # [push, pull_request]
 
 jobs:
   benchmark:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v1
     - name: benchmarks the go code
       run: make benchmark
 
   test:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v1
     - name: tests the code
       run: make test
+
+  push_to_registry:
+    needs: [benchmark, test]
+    name: Push Docker image to GitHub Packages
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: lotharschulz/hello-github-actions/${{ matrix.os }}-${{ github.sha }}
+          tag_with_ref: true
