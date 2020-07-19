@@ -132,6 +132,20 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
+      - name: Dump GITHUB_RUN_ID
+        env:
+          GITHUB_RUN_ID: ${GITHUB_RUN_ID}
+        run: echo "$GITHUB_RUN_ID"
+      - name: GitHub Context and Now with nano seconds
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          REPO=$(echo $GITHUB_CONTEXT | jq -r '.repository')
+          echo $REPO
+          FIRST_COMMIT_TIMESTAMP=$(echo $GITHUB_CONTEXT | jq -r '.event.commits[0].timestamp')
+          echo $FIRST_COMMIT_TIMESTAMP
+          JUSTNOW=$(date +%Y-%m-%d-%M-%S-%N)
+          echo $JUSTNOW
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v1
         with:
