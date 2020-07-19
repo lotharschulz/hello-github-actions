@@ -199,7 +199,7 @@ jobs:
           DOCKER_USERNAME: ${{ github.actor }}
           DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          d=$(date +%Y-%m-%d)
+          d=$(date +%Y-%m-%d--%H-%M-%S--%N)
           tag=$d-${{ matrix.os }}-${{ github.sha }}
           docker build -t docker.pkg.github.com/lotharschulz/hello-github-actions/hello-github-actions:$tag .
           echo ${{ secrets.GITHUB_TOKEN }} | docker login https://docker.pkg.github.com -u USERNAME --password-stdin
