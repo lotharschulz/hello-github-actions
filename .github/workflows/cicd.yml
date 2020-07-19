@@ -187,3 +187,17 @@ jobs:
           #repository: lotharschulz/hello-github-actions/$JUSTNOW-$GITHUB_RUN_ID-${{ github.sha }}
           repository: lotharschulz/hello-github-actions/${{ github.sha }}
           tag_with_ref: true
+
+  build_docker_and_push_to_github_packages2:
+    needs: [benchmark, test]
+    name: Push Docker image to GitHub Packages via Docker Commands
+    runs-on: ubuntu-20.04
+    env:
+      DOCKER_USERNAME: ${{ github.actor }}
+      DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+    run: |
+      d=$(date +%Y-%m-%d)
+      tag=$d-${{ matrix.os }}-${{ github.sha }}
+      docker build -t lotharschulz/hello-github-actions:$tag .
+      docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+      docker push docker.pkg.github.com/lotharschulz/hello-github-actions/hello-github-actions:$tag

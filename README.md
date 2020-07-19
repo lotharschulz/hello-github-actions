@@ -13,7 +13,7 @@ Build docker image and push it to [GitHub Package](https://docs.github.com/en/pa
 
 https://github.com/lotharschulz/hello-github-actions/blob/master/.github/workflows/cicd.yml#L160-L189
 
-This is inspired by [Publishing images to GitHub Packages](https://docs.github.com/en/actions/language-and-framework-guides/publishing-docker-images#publishing-images-to-github-packages)
+See [Publishing images to GitHub Packages](https://docs.github.com/en/actions/language-and-framework-guides/publishing-docker-images#publishing-images-to-github-packages) for more details.
 
 ## CI/CD with Github actions (August 2019 - version 2)
 
