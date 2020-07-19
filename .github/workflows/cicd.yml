@@ -18,7 +18,7 @@ jobs:
       run: make test
 
 # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#example-printing-context-information-to-the-log-file @ 2020 07 19      
-  context-information:
+  context_information:
     needs: [benchmark, test]
     runs-on: ubuntu-20.04
     steps:
@@ -46,20 +46,19 @@ jobs:
       env:
         MATRIX_CONTEXT: ${{ toJson(matrix) }}
       run: echo "$MATRIX_CONTEXT"
-  
 
-#  push_to_registry:
-#    needs: [benchmark, test]
-#    name: Push Docker image to GitHub Packages
-#    runs-on: ubuntu-20.04
-#    steps:
-#      - name: Check out the repo
-#        uses: actions/checkout@v2
-#      - name: Push to GitHub Packages
-#        uses: docker/build-push-action@v1
-#        with:
-#          username: ${{ github.actor }}
-#          password: ${{ secrets.GITHUB_TOKEN }}
-#          registry: docker.pkg.github.com
-#          repository: lotharschulz/hello-github-actions/${{ job }}-${{ github.sha }}
-#          tag_with_ref: true
+  push_to_registry:
+    needs: [benchmark, test]
+    name: Push Docker image to GitHub Packages
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: lotharschulz/hello-github-actions/$(date +%Y-%m-%d)-${{ github.sha }}
+          tag_with_ref: true
