@@ -152,5 +152,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: lotharschulz/hello-github-actions/$JUSTNOW-$GITHUB_RUN_ID-${{ github.sha }}
+          #repository: lotharschulz/hello-github-actions/$JUSTNOW-$GITHUB_RUN_ID-${{ github.sha }}
+          repository: lotharschulz/hello-github-actions/${{ github.sha }}-${$GITHUB_CONTEXT | jq -r '.event.commits[0].timestamp'}
           tag_with_ref: true
