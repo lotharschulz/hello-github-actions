@@ -194,12 +194,12 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Push Docker image to GitHub Packages via Docker Commands
-      env:
-        DOCKER_USERNAME: ${{ github.actor }}
-        DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        d=$(date +%Y-%m-%d)
-        tag=$d-${{ matrix.os }}-${{ github.sha }}
-        docker build -t lotharschulz/hello-github-actions:$tag .
-        docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
-        docker push docker.pkg.github.com/lotharschulz/hello-github-actions/hello-github-actions:$tag
+        env:
+          DOCKER_USERNAME: ${{ github.actor }}
+          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          d=$(date +%Y-%m-%d)
+          tag=$d-${{ matrix.os }}-${{ github.sha }}
+          docker build -t lotharschulz/hello-github-actions:$tag .
+          docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+          docker push docker.pkg.github.com/lotharschulz/hello-github-actions/hello-github-actions:$tag
