@@ -47,6 +47,18 @@ jobs:
         MATRIX_CONTEXT: ${{ toJson(matrix) }}
       run: echo "$MATRIX_CONTEXT"
 
+# https://docs.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables @ 2020 07 19
+  context_information:
+    needs: [benchmark, test]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Dump GitHub GITHUB_RUN_ID
+        env:
+          GITHUB_RUN_ID: ${{ GITHUB_RUN_ID }}
+        run: echo "$GITHUB_RUN_ID"
+      
+      
+
   push_to_registry:
     needs: [benchmark, test]
     name: Push Docker image to GitHub Packages
@@ -60,5 +72,5 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: lotharschulz/hello-github-actions/$(date +%Y-%m-%d)-${{ github.sha }}
+          repository: lotharschulz/hello-github-actions/${{ github.sha }}
           tag_with_ref: true
