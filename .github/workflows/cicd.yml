@@ -125,6 +125,38 @@ jobs:
           GITHUB_RUN_NUMBER: ${GITHUB_GRAPHQL_URL}
         run: echo "$GITHUB_GRAPHQL_URL"
 
+  build_and_push_to_dockerhub_if_linux:
+    needs: [benchmark, test]
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macOS-10.15, ubuntu-20.04]
+        goos: [linux, darwin]
+        exclude:
+          - os: macOS-10.15
+            goos: linux
+          - os: ubuntu-20.04
+            goos: darwin
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v1
+    - name: builds the binary
+      run: CGO_ENABLED=0 GOOS=${{ matrix.goos }} go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hello_world${{ matrix.os }}${{ matrix.goos }} .
+  
+    - uses: actions/checkout@master
+    - name: if linux build docker image and docker hub login as well as push
+      if: matrix.os == 'ubuntu-20.04'
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        # inspired by https://gist.github.com/jonico/e18127b487d198606e31aac669262af8 @ 2019 08 19
+        d=$(date +%Y-%m-%d)
+        tag=$d-${{ matrix.os }}-${{ github.sha }}
+        docker build -t lotharschulz/hello-github-actions:$tag .
+        docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+        docker push lotharschulz/hello-github-actions:$tag
+
   push_to_pkg_github_registry:
     needs: [benchmark, test]
     name: Push Docker image to GitHub Packages
@@ -153,5 +185,5 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
           #repository: lotharschulz/hello-github-actions/$JUSTNOW-$GITHUB_RUN_ID-${{ github.sha }}
-          repository: lotharschulz/hello-github-actions/${{ github.sha }}-${$GITHUB_CONTEXT | jq -r '.event.commits[0].timestamp'}
+          repository: lotharschulz/hello-github-actions/${{ github.sha }}
           tag_with_ref: true
