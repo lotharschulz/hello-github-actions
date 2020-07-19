@@ -18,7 +18,7 @@ jobs:
       run: make test
 
 # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#example-printing-context-information-to-the-log-file @ 2020 07 19      
-  context information:
+  context-information:
     needs: [benchmark, test]
     runs-on: ubuntu-20.04
     steps:
