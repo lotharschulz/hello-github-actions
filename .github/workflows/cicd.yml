@@ -17,18 +17,47 @@ jobs:
     - name: tests the code
       run: make test
 
-  push_to_registry:
+# https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#example-printing-context-information-to-the-log-file @ 2020 07 19      
+  context information:
     needs: [benchmark, test]
-    name: Push Docker image to GitHub Packages
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Check out the repo
-        uses: actions/checkout@v2
-      - name: Push to GitHub Packages
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com
-          repository: lotharschulz/hello-github-actions/${{ job }}-${{ github.sha }}
-          tag_with_ref: true
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
+    - name: Dump job context
+      env:
+        JOB_CONTEXT: ${{ toJson(job) }}
+      run: echo "$JOB_CONTEXT"
+    - name: Dump steps context
+      env:
+        STEPS_CONTEXT: ${{ toJson(steps) }}
+      run: echo "$STEPS_CONTEXT"
+    - name: Dump runner context
+      env:
+        RUNNER_CONTEXT: ${{ toJson(runner) }}
+      run: echo "$RUNNER_CONTEXT"
+    - name: Dump strategy context
+      env:
+        STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+      run: echo "$STRATEGY_CONTEXT"
+    - name: Dump matrix context
+      env:
+        MATRIX_CONTEXT: ${{ toJson(matrix) }}
+      run: echo "$MATRIX_CONTEXT"
+  
+
+#  push_to_registry:
+#    needs: [benchmark, test]
+#    name: Push Docker image to GitHub Packages
+#    runs-on: ubuntu-20.04
+#    steps:
+#      - name: Check out the repo
+#        uses: actions/checkout@v2
+#      - name: Push to GitHub Packages
+#        uses: docker/build-push-action@v1
+#        with:
+#          username: ${{ github.actor }}
+#          password: ${{ secrets.GITHUB_TOKEN }}
+#          registry: docker.pkg.github.com
+#          repository: lotharschulz/hello-github-actions/${{ job }}-${{ github.sha }}
+#          tag_with_ref: true
