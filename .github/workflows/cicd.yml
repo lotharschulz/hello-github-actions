@@ -54,7 +54,7 @@ jobs:
     steps:
       - name: Dump GitHub GITHUB_RUN_ID
         env:
-          GITHUB_RUN_ID: ${{ GITHUB_RUN_ID }}
+          GITHUB_RUN_ID: ${GITHUB_RUN_ID}
         run: echo "$GITHUB_RUN_ID"
       
       
