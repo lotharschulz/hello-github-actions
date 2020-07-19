@@ -125,7 +125,7 @@ jobs:
           GITHUB_RUN_NUMBER: ${GITHUB_GRAPHQL_URL}
         run: echo "$GITHUB_GRAPHQL_URL"
 
-  build_and_push_to_dockerhub_if_linux:
+  build_docker_and_push_to_dockerhub_if_linux:
     needs: [benchmark, test]
     strategy:
       fail-fast: false
@@ -157,7 +157,7 @@ jobs:
         docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
         docker push lotharschulz/hello-github-actions:$tag
 
-  push_to_pkg_github_registry:
+  build_docker_and_push_to_github_packages:
     needs: [benchmark, test]
     name: Push Docker image to GitHub Packages
     runs-on: ubuntu-20.04
