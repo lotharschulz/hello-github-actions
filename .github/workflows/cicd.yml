@@ -146,11 +146,11 @@ jobs:
           echo $FIRST_COMMIT_TIMESTAMP
           JUSTNOW=$(date +%Y-%m-%d--%H-%M-%S--%N)
           echo $JUSTNOW
-#      - name: Push to GitHub Packages
-#        uses: docker/build-push-action@v1
-#        with:
-#          username: ${{ github.actor }}
-#          password: ${{ secrets.GITHUB_TOKEN }}
-#          registry: docker.pkg.github.com
-#          repository: lotharschulz/hello-github-actions/${GITHUB_RUN_ID}-${{ github.sha }}
-#          tag_with_ref: true
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: lotharschulz/hello-github-actions/$JUSTNOW-$GITHUB_RUN_ID-${{ github.sha }}
+          tag_with_ref: true
