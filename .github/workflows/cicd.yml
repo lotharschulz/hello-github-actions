@@ -47,19 +47,85 @@ jobs:
         MATRIX_CONTEXT: ${{ toJson(matrix) }}
       run: echo "$MATRIX_CONTEXT"
 
-# https://docs.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables @ 2020 07 19
+# https://docs.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables#default-environment-variables @ 2020 07 19
   context_env:
     needs: [benchmark, test]
     runs-on: ubuntu-20.04
     steps:
-      - name: Dump GitHub GITHUB_RUN_ID
+      - name: Dump GitHub HOME	
+        env:
+          GHHOME: ${HOME}
+        run: echo "$GHHOME"
+      - name: Dump GITHUB_WORKFLOW
+        env:
+          GITHUB_WORKFLOW: ${GITHUB_WORKFLOW}
+        run: echo "$GITHUB_WORKFLOW"
+      - name: Dump GITHUB_RUN_ID
         env:
           GITHUB_RUN_ID: ${GITHUB_RUN_ID}
         run: echo "$GITHUB_RUN_ID"
-      
-      
+      - name: Dump GITHUB_RUN_NUMBER
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_RUN_NUMBER}
+        run: echo "$GITHUB_RUN_NUMBER"
+      - name: Dump GITHUB_ACTION
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_ACTION}
+        run: echo "$GITHUB_ACTION"
+      - name: Dump GITHUB_ACTIONS
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_ACTIONS}
+        run: echo "$GITHUB_ACTIONS"
+      - name: Dump GITHUB_ACTOR
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_ACTOR}
+        run: echo "$GITHUB_ACTOR"
+      - name: Dump GITHUB_REPOSITORY	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_REPOSITORY}
+        run: echo "$GITHUB_REPOSITORY"
+      - name: Dump GITHUB_REPOSITORY	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_REPOSITORY}
+        run: echo "$GITHUB_REPOSITORY"
+      - name: Dump GITHUB_EVENT_PATH	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_EVENT_PATH}
+        run: echo "$GITHUB_EVENT_PATH"
+      - name: Dump GITHUB_WORKSPACE	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_WORKSPACE}
+        run: echo "$GITHUB_WORKSPACE"
+      - name: Dump GITHUB_SHA	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_SHA}
+        run: echo "$GITHUB_SHA"
+      - name: Dump GITHUB_REF	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_REF}
+        run: echo "$GITHUB_REF"
+      - name: Dump GITHUB_HEAD_REF	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_HEAD_REF}
+        run: echo "$GITHUB_HEAD_REF"
+      - name: Dump GITHUB_BASE_REF	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_BASE_REF}
+        run: echo "$GITHUB_BASE_REF"
+      - name: Dump GITHUB_SERVER_URL	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_SERVER_URL}
+        run: echo "$GITHUB_SERVER_URL"
+      - name: Dump GITHUB_API_URL	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_API_URL}
+        run: echo "$GITHUB_API_URL"
+      - name: Dump GITHUB_GRAPHQL_URL	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_GRAPHQL_URL}
+        run: echo "$GITHUB_GRAPHQL_URL"
 
-  push_to_registry:
+  push_to_pkg_github_registry:
     needs: [benchmark, test]
     name: Push Docker image to GitHub Packages
     runs-on: ubuntu-20.04
@@ -72,5 +138,5 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: lotharschulz/hello-github-actions/${{ github.sha }}
+          repository: lotharschulz/hello-github-actions/${GITHUB_RUN_ID}-${{ github.sha }}
           tag_with_ref: true
