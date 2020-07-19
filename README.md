@@ -2,9 +2,18 @@
 
 ![CI/CD Docker & Dockerhub with actions v2](https://github.com/lotharschulz/hello-github-actions/workflows/CI/CD%20Docker%20&%20Dockerhub%20with%20actions%20v2/badge.svg)
 
-A repository exploring GitHub Actions that consists of two versions
+A repository exploring GitHub Actions that consists of 3 flavours:
+- [Publish Docker Image to GitHub Packages](https://github.com/lotharschulz/hello-github-actions#publish-docker-image-to-gitHub-packages)
 - **[CI/CD with Github actions (August 2019 - version 2) ](https://www.lotharschulz.info/2019/08/26/ci-cd-with-github-actions-v2/)**
 - **[outdated Version 1: CI/CD with Github actions (May 2019 - version 1)](https://www.lotharschulz.info/2019/05/09/ci-cd-with-github-actions/)**
+
+## Publish Docker Image to GitHub Packages
+
+Build docker image and push it to [GitHub Package](https://docs.github.com/en/packages) registry:
+
+https://github.com/lotharschulz/hello-github-actions/blob/master/.github/workflows/cicd.yml#L160-L189
+
+This is inspired by [Publishing images to GitHub Packages](https://docs.github.com/en/actions/language-and-framework-guides/publishing-docker-images#publishing-images-to-github-packages)
 
 ## CI/CD with Github actions (August 2019 - version 2)
 
