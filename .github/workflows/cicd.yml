@@ -202,5 +202,6 @@ jobs:
           d=$(date +%Y-%m-%d)
           tag=$d-${{ matrix.os }}-${{ github.sha }}
           docker build -t docker.pkg.github.com/lotharschulz/hello-github-actions/hello-github-actions:$tag .
-          docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+#          echo ${{ secrets.GITHUB_TOKEN }} | docker login https://docker.pkg.github.com -u USERNAME --password-stdin
+          docker login https://docker.pkg.github.com -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
 #          docker push docker.pkg.github.com/lotharschulz/hello-github-actions/hello-github-actions:$tag
