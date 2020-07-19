@@ -159,7 +159,7 @@ jobs:
 
   build_docker_and_push_to_github_packages:
     needs: [benchmark, test]
-    name: Push Docker image to GitHub Packages
+    name: Push Docker image to GitHub Packages using docker build-push-action
     runs-on: ubuntu-20.04
     steps:
       - name: Check out the repo
@@ -190,10 +190,10 @@ jobs:
 
   build_docker_and_push_to_github_packages2:
     needs: [benchmark, test]
+    name: Push Docker image to GitHub Packages using via docker cli commands
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v1
-      - name: Push Docker image to GitHub Packages via Docker Commands
         env:
           DOCKER_USERNAME: ${{ github.actor }}
           DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
@@ -201,5 +201,5 @@ jobs:
           d=$(date +%Y-%m-%d)
           tag=$d-${{ matrix.os }}-${{ github.sha }}
           docker build -t docker.pkg.github.com/lotharschulz/hello-github-actions/hello-github-actions:$tag .
-#          docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+          docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
 #          docker push docker.pkg.github.com/lotharschulz/hello-github-actions/hello-github-actions:$tag
