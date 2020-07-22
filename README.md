@@ -14,9 +14,9 @@ Publishing docker images using a step as above enables you to use all options of
 This is more flexible compared with the initial approach and thus my favorite.
 However, it also comes with a price: you also need to login and push via docker cli.
 
-Docker image build and publish to [GitHub Package](https://docs.github.com/en/packages) registry can be done twofold:
+Docker image build and publish to [GitHub Package](https://docs.github.com/packages) registry can be done twofold:
 
-- Following [Publishing images to GitHub Packages](https://docs.github.com/en/actions/language-and-framework-guides/publishing-docker-images#publishing-images-to-github-packages): https://github.com/lotharschulz/hello-github-actions/blob/master/.github/workflows/cicd.yml#L181-L189
+- Following [Publishing images to GitHub Packages](https://docs.github.com/actions/language-and-framework-guides/publishing-docker-images#publishing-images-to-github-packages): https://github.com/lotharschulz/hello-github-actions/blob/master/.github/workflows/cicd.yml#L181-L189
 
 - Publish using the docker cli: https://github.com/lotharschulz/hello-github-actions/blob/master/.github/workflows/cicd.yml#L196-L206
 
