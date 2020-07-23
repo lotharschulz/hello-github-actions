@@ -2,9 +2,27 @@
 
 ![CI/CD Docker & Dockerhub with actions v2](https://github.com/lotharschulz/hello-github-actions/workflows/CI/CD%20Docker%20&%20Dockerhub%20with%20actions%20v2/badge.svg)
 
-A repository exploring GitHub Actions that consists of two versions
-- **[CI/CD with Github actions (August 2019 - version 2) ](https://www.lotharschulz.info/2019/08/26/ci-cd-with-github-actions-v2/)**
-- **[outdated Version 1: CI/CD with Github actions (May 2019 - version 1)](https://www.lotharschulz.info/2019/05/09/ci-cd-with-github-actions/)**
+A repository exploring GitHub Actions that serves 3 explorations:
+
+- [Customize Docker Image Tags for GitHub Docker Packages](https://www.lotharschulz.info/2020/07/23/github-packages-docker-image-tags-customization-with-github-actions)
+- [CI/CD with Github actions (August 2019 - version 2) ](https://www.lotharschulz.info/2019/08/26/ci-cd-with-github-actions-v2/)
+- [outdated Version 1: CI/CD with Github actions (May 2019 - version 1)](https://www.lotharschulz.info/2019/05/09/ci-cd-with-github-actions/)
+
+## Publish Docker Image to GitHub Packages
+
+Publishing docker images using a step as above enables you to use all options of the docker cli – within the ubuntu shell in my case [link zu meinem Repo einfügen].
+This is more flexible compared with the initial approach and thus my favorite.
+However, it also comes with a price: you also need to login and push via docker cli.
+
+Docker image build and publish to [GitHub Package](https://docs.github.com/packages) registry can be done twofold:
+
+- Following [Publishing images to GitHub Packages](https://docs.github.com/actions/language-and-framework-guides/publishing-docker-images#publishing-images-to-github-packages): https://github.com/lotharschulz/hello-github-actions/blob/master/.github/workflows/cicd.yml#L181-L189
+
+- Publish using the docker cli: https://github.com/lotharschulz/hello-github-actions/blob/master/.github/workflows/cicd.yml#L196-L206
+
+
+See [Publishing images to GitHub Packages](https://docs.github.com/en/actions/language-and-framework-guides/publishing-docker-images#publishing-images-to-github-packages) for more details.
+
 
 ## CI/CD with Github actions (August 2019 - version 2)
 

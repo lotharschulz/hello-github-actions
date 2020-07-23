@@ -1,4 +1,4 @@
-FROM golang:1.12 as builder
+FROM golang:1.14 as builder
 LABEL maintainer="Lothar Schulz <http://bit.ly/2zVLbWh>"
 
 WORKDIR /go/src/github.com/lotharschulz/hello-github-actions/

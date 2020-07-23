@@ -1,42 +1,43 @@
-name: CI/CD Docker & Dockerhub with actions v2
+name: Publish to Dockerhub and GitHub packages
 
 on: push # [push, pull_request]
 
 jobs:
   benchmark:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v1
     - name: benchmarks the go code
       run: make benchmark
 
   test:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v1
     - name: tests the code
       run: make test
 
-  build-and-dockerhub-push-if-linux:
+# https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#example-printing-context-information-to-the-log-file @ 2020 07 19      
+  context_information:
     needs: [benchmark, test]
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macOS-10.15, ubuntu-18.04]
-        goos: [linux, darwin]
-        exclude:
-          - os: macOS-10.15
-            goos: linux
-          - os: ubuntu-18.04
-            goos: darwin
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-20.04
     steps:
-
-    # https://help.github.com/en/articles/contexts-and-expression-syntax-for-github-actions#example-printing-context-information-to-the-log-file @ 2019 08 18
     - name: Dump GitHub context
       env:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: echo "$GITHUB_CONTEXT"
+    - name: Dump job context
+      env:
+        JOB_CONTEXT: ${{ toJson(job) }}
+      run: echo "$JOB_CONTEXT"
+    - name: Dump steps context
+      env:
+        STEPS_CONTEXT: ${{ toJson(steps) }}
+      run: echo "$STEPS_CONTEXT"
+    - name: Dump runner context
+      env:
+        RUNNER_CONTEXT: ${{ toJson(runner) }}
+      run: echo "$RUNNER_CONTEXT"
     - name: Dump strategy context
       env:
         STRATEGY_CONTEXT: ${{ toJson(strategy) }}
@@ -45,26 +46,106 @@ jobs:
       env:
         MATRIX_CONTEXT: ${{ toJson(matrix) }}
       run: echo "$MATRIX_CONTEXT"
-    - name: Dump job context
-      env:
-        JOB_CONTEXT: ${{ toJson(job) }}
-      run: echo "$JOB_CONTEXT"
-    - name: Dump runner context
-      env:
-        RUNNER_CONTEXT: ${{ toJson(runner) }}
-      run: echo "$RUNNER_CONTEXT"
-    - name: Dump steps context
-      env:
-        STEPS_CONTEXT: ${{ toJson(steps) }}
-      run: echo "$STEPS_CONTEXT"
 
+# https://docs.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables#default-environment-variables @ 2020 07 19
+  context_env:
+    needs: [benchmark, test]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Dump GitHub HOME	
+        env:
+          GHHOME: ${HOME}
+        run: echo "$GHHOME"
+      - name: Dump GITHUB_WORKFLOW
+        env:
+          GITHUB_WORKFLOW: ${GITHUB_WORKFLOW}
+        run: echo "$GITHUB_WORKFLOW"
+      - name: Dump GITHUB_RUN_ID
+        env:
+          GITHUB_RUN_ID: ${GITHUB_RUN_ID}
+        run: echo "$GITHUB_RUN_ID"
+      - name: Dump GITHUB_RUN_NUMBER
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_RUN_NUMBER}
+        run: echo "$GITHUB_RUN_NUMBER"
+      - name: Dump GITHUB_ACTION
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_ACTION}
+        run: echo "$GITHUB_ACTION"
+      - name: Dump GITHUB_ACTIONS
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_ACTIONS}
+        run: echo "$GITHUB_ACTIONS"
+      - name: Dump GITHUB_ACTOR
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_ACTOR}
+        run: echo "$GITHUB_ACTOR"
+      - name: Dump GITHUB_REPOSITORY	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_REPOSITORY}
+        run: echo "$GITHUB_REPOSITORY"
+      - name: Dump GITHUB_REPOSITORY	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_REPOSITORY}
+        run: echo "$GITHUB_REPOSITORY"
+      - name: Dump GITHUB_EVENT_PATH	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_EVENT_PATH}
+        run: echo "$GITHUB_EVENT_PATH"
+      - name: Dump GITHUB_WORKSPACE	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_WORKSPACE}
+        run: echo "$GITHUB_WORKSPACE"
+      - name: Dump GITHUB_SHA	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_SHA}
+        run: echo "$GITHUB_SHA"
+      - name: Dump GITHUB_REF	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_REF}
+        run: echo "$GITHUB_REF"
+      - name: Dump GITHUB_HEAD_REF	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_HEAD_REF}
+        run: echo "$GITHUB_HEAD_REF"
+      - name: Dump GITHUB_BASE_REF	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_BASE_REF}
+        run: echo "$GITHUB_BASE_REF"
+      - name: Dump GITHUB_SERVER_URL	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_SERVER_URL}
+        run: echo "$GITHUB_SERVER_URL"
+      - name: Dump GITHUB_API_URL	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_API_URL}
+        run: echo "$GITHUB_API_URL"
+      - name: Dump GITHUB_GRAPHQL_URL	
+        env:
+          GITHUB_RUN_NUMBER: ${GITHUB_GRAPHQL_URL}
+        run: echo "$GITHUB_GRAPHQL_URL"
+
+  build_docker_and_push_to_dockerhub_if_linux:
+    needs: [benchmark, test]
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macOS-10.15, ubuntu-20.04]
+        goos: [linux, darwin]
+        exclude:
+          - os: macOS-10.15
+            goos: linux
+          - os: ubuntu-20.04
+            goos: darwin
+    runs-on: ${{ matrix.os }}
+    steps:
     - uses: actions/checkout@v1
     - name: builds the binary
       run: CGO_ENABLED=0 GOOS=${{ matrix.goos }} go build -a -installsuffix cgo -ldflags '-w -extldflags "-static"' -o hello_world${{ matrix.os }}${{ matrix.goos }} .
-
+  
     - uses: actions/checkout@master
     - name: if linux build docker image and docker hub login as well as push
-      if: matrix.os == 'ubuntu-18.04'
+      if: matrix.os == 'ubuntu-20.04'
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -75,3 +156,52 @@ jobs:
         docker build -t lotharschulz/hello-github-actions:$tag .
         docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
         docker push lotharschulz/hello-github-actions:$tag
+
+  build_docker_and_push_to_github_packages:
+    needs: [benchmark, test]
+    name: Push Docker image to GitHub Packages using docker build-push-action
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Dump GITHUB_RUN_ID
+        env:
+          GITHUB_RUN_ID: ${GITHUB_RUN_ID}
+        run: echo "$GITHUB_RUN_ID"
+      - name: GitHub Context and Now with nano seconds
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          REPO=$(echo $GITHUB_CONTEXT | jq -r '.repository')
+          echo $REPO
+          FIRST_COMMIT_TIMESTAMP=$(echo $GITHUB_CONTEXT | jq -r '.event.commits[0].timestamp')
+          echo $FIRST_COMMIT_TIMESTAMP
+          JUSTNOW=$(date +%Y-%m-%d--%H-%M-%S--%N)
+          echo $JUSTNOW
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          #repository: lotharschulz/hello-github-actions/$JUSTNOW-$GITHUB_RUN_ID-${{ github.sha }}
+          repository: lotharschulz/hello-github-actions/${{ github.sha }}
+          tag_with_ref: true
+
+  build_docker_and_push_to_github_packages2:
+    needs: [benchmark, test]
+    name: Push Docker image to GitHub Packages using via docker cli commands
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build and Push
+        env:
+          DOCKER_USERNAME: ${{ github.actor }}
+          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          d=$(date +%Y-%m-%d--%H-%M-%S--%N)
+          tag=$d-${{ matrix.os }}-${{ github.sha }}
+          docker build -t docker.pkg.github.com/lotharschulz/hello-github-actions/hello-github-actions:$tag .
+          echo ${{ secrets.GITHUB_TOKEN }} | docker login https://docker.pkg.github.com -u USERNAME --password-stdin
+          docker push docker.pkg.github.com/lotharschulz/hello-github-actions/hello-github-actions:$tag
+#          docker login https://docker.pkg.github.com -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} # success and --password-stdin warning
