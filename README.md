@@ -21,7 +21,7 @@ Docker image build and publish to [GitHub Package](https://docs.github.com/packa
 - Publish using the docker cli: https://github.com/lotharschulz/hello-github-actions/blob/master/.github/workflows/cicd.yml#L196-L206
 
 
-See [Publishing images to GitHub Packages](https://docs.github.com/en/actions/language-and-framework-guides/publishing-docker-images#publishing-images-to-github-packages) for more details.
+See also [Publishing Docker images](https://docs.github.com/en/actions/language-and-framework-guides/publishing-docker-images) for more details.
 
 
 ## CI/CD with Github actions (August 2019 - version 2)
