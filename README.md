@@ -2,11 +2,10 @@
 
 ![CI/CD Docker & Dockerhub with actions v2](https://github.com/lotharschulz/hello-github-actions/workflows/CI/CD%20Docker%20&%20Dockerhub%20with%20actions%20v2/badge.svg)
 
-A repository exploring GitHub Actions that serves 3 explorations:
+A repository exploring GitHub Actions that serves 2 explorations:
 
 - [Customize Docker Image Tags for GitHub Docker Packages](https://www.lotharschulz.info/2020/07/23/github-packages-docker-image-tags-customization-with-github-actions)
-- [CI/CD with Github actions (August 2019 - version 2) ](https://www.lotharschulz.info/2019/08/26/ci-cd-with-github-actions-v2/)
-- [outdated Version 1: CI/CD with Github actions (May 2019 - version 1)](https://www.lotharschulz.info/2019/05/09/ci-cd-with-github-actions/)
+- [CI/CD with Github actions](https://www.lotharschulz.info/2019/08/26/ci-cd-with-github-actions-v2/)
 
 ## Publish Docker Image to GitHub Packages
 
