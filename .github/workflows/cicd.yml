@@ -212,20 +212,18 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.CR_PAT }}
-
-      - name: Build and Push to GitHub Container Registry
+      - uses: actions/checkout@v2
+      - name: Build and Push
+        env:
+          DOCKER_USERNAME: ${{ github.actor }}
+          DOCKER_PASSWORD: ${{ secrets.CR_PAT }}
         run: |
-          #echo "something"
+          echo "something"
+          echo "${DOCKER_PASSWORD}" | docker login https://ghcr.io -u ${DOCKER_USERNAME} --password-stdin
           #echo "${{ secrets.GCR }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
-          #echo "something 2"
           d=$(date +%Y-%m-%d--%H-%M-%S--%N)
           tag=$d-${{ matrix.os }}-${{ github.sha }}
           IMAGE_AND_TAG = ghcr.io/lotharschulz/hello-github-actions/hello-github-actions:$tag
+          echo "$IMAGE_AND_TAG"
           docker build -t $IMAGE_AND_TAG .
           docker push $IMAGE_AND_TAG
