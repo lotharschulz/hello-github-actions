@@ -216,7 +216,7 @@ jobs:
       - name: Build and Push
         env:
           DOCKER_USERNAME: ${{ github.actor }}
-          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          DOCKER_PASSWORD: ${{ secrets.GCR }}
         run: |
           echo ${DOCKER_PASSWORD} | docker login https://ghcr.io -u ${DOCKER_USERNAME} --password-stdin
           d=$(date +%Y-%m-%d--%H-%M-%S--%N)
