@@ -219,7 +219,7 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.GCR }}
         run: |
           echo "something"
-          echo "${DOCKER_PASSWORD}"" | docker login https://ghcr.io -u ${DOCKER_USERNAME} --password-stdin
+          echo "${DOCKER_PASSWORD}" | docker login https://ghcr.io -u ${DOCKER_USERNAME} --password-stdin
           #echo "${{ secrets.GCR }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
           d=$(date +%Y-%m-%d--%H-%M-%S--%N)
           tag=$d-${{ matrix.os }}-${{ github.sha }}
