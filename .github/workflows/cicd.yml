@@ -214,13 +214,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build and Push
-        env:
-          DOCKER_USERNAME: ${{ github.actor }}
-          DOCKER_PASSWORD: ${{ secrets.GCR }}
         run: |
           echo "something"
-          echo "${DOCKER_PASSWORD}" | docker login https://ghcr.io -u ${DOCKER_USERNAME} --password-stdin
-          #echo "${{ secrets.GCR }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+          echo "${{ secrets.GCR }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+          echo "something 2"
           d=$(date +%Y-%m-%d--%H-%M-%S--%N)
           tag=$d-${{ matrix.os }}-${{ github.sha }}
           IMAGE_AND_TAG = ghcr.io/lotharschulz/hello-github-actions/hello-github-actions:$tag
