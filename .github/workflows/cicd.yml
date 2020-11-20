@@ -212,12 +212,14 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.CR_PAT }}
 
-      - name: Log into GitHub Container Registry
-        run: echo "${{ secrets.CR_PAT }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
-
-      - name: Build and Push
+      - name: Build and Push to GitHub Container Registry
         run: |
           #echo "something"
           #echo "${{ secrets.GCR }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
