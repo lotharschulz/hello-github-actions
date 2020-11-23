@@ -1,6 +1,6 @@
 # GitHub Actions
 
-![CI/CD Docker & Dockerhub with actions v2](https://github.com/lotharschulz/hello-github-actions/workflows/CI/CD%20Docker%20&%20Dockerhub%20with%20actions%20v2/badge.svg)
+![CI/CD Docker images to Dockerhub, GitHub Packages and GitHub Container Registry with GitHub Actions](https://github.com/lotharschulz/hello-github-actions/workflows/CI/CD%20Docker%20&%20Dockerhub%20with%20actions%20v2/badge.svg)
 
 A repository exploring GitHub Actions that serves 2 explorations:
 
@@ -19,19 +19,16 @@ Use the _repository encypted secret_ in a workflow file: `GCR_PASSWORD: ${{ secr
 
 Find the published docker images in _packages type container_: [https://github.com/[username]?ecosystem=container&tab=packages](https://github.com/lotharschulz?ecosystem=container&tab=packages)
 
+GitHub actions workflow file: https://github.com/lotharschulz/hello-github-actions/blob/main/.github/workflows/cicd.yml#L209-L228
+
 (Note: GitHub Container Registry is currently in public beta)
 
 ## Publish Docker Image to GitHub Packages
 
-Publishing docker images using a step as above enables you to use all options of the docker cli – within the ubuntu shell in my case [link zu meinem Repo einfügen].
-This is more flexible compared with the initial approach and thus my favorite.
-However, it also comes with a price: you also need to login and push via docker cli.
+Publishing Docker Images to GitHub Packages using:
 
-Docker image build and publish to [GitHub Package](https://docs.github.com/packages) registry can be done in two steps:
-
-- Following [Publishing images to GitHub Packages](https://docs.github.com/actions/language-and-framework-guides/publishing-docker-images#publishing-images-to-github-packages): https://github.com/lotharschulz/hello-github-actions/blob/master/.github/workflows/cicd.yml#L181-L189
-
-- Publish using the docker cli: https://github.com/lotharschulz/hello-github-actions/blob/master/.github/workflows/cicd.yml#L196-L206
+- _build-push-action_: https://github.com/lotharschulz/hello-github-actions/blob/main/.github/workflows/cicd.yml#L160-L189
+- _docker cli_: https://github.com/lotharschulz/hello-github-actions/blob/main/.github/workflows/cicd.yml#L191-L207
 
 Find the published docker images in _packages type docker_: [https://github.com/[username]?ecosystem=docker&tab=packages](https://github.com/lotharschulz?ecosystem=docker&tab=packages)
 
