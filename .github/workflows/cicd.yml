@@ -201,7 +201,8 @@ jobs:
         run: |
           echo ${DOCKER_PASSWORD} | docker login https://docker.pkg.github.com -u ${DOCKER_USERNAME} --password-stdin
           d=$(date +%Y-%m-%d--%H-%M-%S--%N)
-          tag=$d-${{ github.sha }}
+#          tag=$d-${{ github.sha }}
+          tag=$d-cli
           docker build -t docker.pkg.github.com/lotharschulz/hello-github-actions/hello-github-actions:$tag .
           docker push docker.pkg.github.com/lotharschulz/hello-github-actions/hello-github-actions:$tag
 #          docker login https://docker.pkg.github.com -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} # success and --password-stdin warning
