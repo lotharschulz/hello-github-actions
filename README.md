@@ -7,6 +7,20 @@ A repository exploring GitHub Actions that serves 2 explorations:
 - [Customize Docker Image Tags for GitHub Docker Packages](https://www.lotharschulz.info/2020/07/23/github-packages-docker-image-tags-customization-with-github-actions)
 - [CI/CD with Github actions](https://www.lotharschulz.info/2019/08/26/ci-cd-with-github-actions-v2/)
 
+## Publish Docker Image to GitHub Container Registry
+
+Publishing to [GitHub Container Registry](https://docs.github.com/en/free-pro-team@latest/packages/getting-started-with-github-container-registry/about-github-container-registry) requires a [personal access token](https://docs.github.com/en/free-pro-team@latest/developers/apps/about-apps#personal-access-tokens) with these scopes:
+- repo (full access)
+- write:packages
+- delete:packages
+Store the _personal access token_ value in a [repository encypted secret](https://docs.github.com/en/free-pro-team@latest/actions/reference/encrypted-secrets) (e.g. `CR_PAT`) 
+
+Use the _repository encypted secret_ in a workflow file: `GCR_PASSWORD: ${{ secrets.CR_PAT }}` 
+
+Find the generated docker images in https://github.com/[username]?tab=packages&repo_name=[repository]
+
+(Note: GitHub Container Registry is currently in public beta)
+
 ## Publish Docker Image to GitHub Packages
 
 Publishing docker images using a step as above enables you to use all options of the docker cli – within the ubuntu shell in my case [link zu meinem Repo einfügen].
