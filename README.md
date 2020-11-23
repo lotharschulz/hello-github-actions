@@ -17,7 +17,7 @@ Store the _personal access token_ value in a [repository encypted secret](https:
 
 Use the _repository encypted secret_ in a workflow file: `GCR_PASSWORD: ${{ secrets.CR_PAT }}` 
 
-Find the generated docker images in https://github.com/[username]?tab=packages&repo_name=[repository]
+Find the published docker images in _packages type container_: [https://github.com/[username]?ecosystem=container&tab=packages](https://github.com/lotharschulz?ecosystem=container&tab=packages)
 
 (Note: GitHub Container Registry is currently in public beta)
 
@@ -27,11 +27,13 @@ Publishing docker images using a step as above enables you to use all options of
 This is more flexible compared with the initial approach and thus my favorite.
 However, it also comes with a price: you also need to login and push via docker cli.
 
-Docker image build and publish to [GitHub Package](https://docs.github.com/packages) registry can be done twofold:
+Docker image build and publish to [GitHub Package](https://docs.github.com/packages) registry can be done in two steps:
 
 - Following [Publishing images to GitHub Packages](https://docs.github.com/actions/language-and-framework-guides/publishing-docker-images#publishing-images-to-github-packages): https://github.com/lotharschulz/hello-github-actions/blob/master/.github/workflows/cicd.yml#L181-L189
 
 - Publish using the docker cli: https://github.com/lotharschulz/hello-github-actions/blob/master/.github/workflows/cicd.yml#L196-L206
+
+Find the published docker images in _packages type docker_: [https://github.com/[username]?ecosystem=docker&tab=packages](https://github.com/lotharschulz?ecosystem=docker&tab=packages)
 
 
 See also [Publishing Docker images](https://docs.github.com/en/actions/language-and-framework-guides/publishing-docker-images) for more details.
