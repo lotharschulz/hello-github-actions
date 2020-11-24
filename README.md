@@ -84,6 +84,3 @@ make build.docker
 ```
 make clean
 ```
-
-dummy commit
-
