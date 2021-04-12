@@ -10,9 +10,11 @@ A repository exploring GitHub Actions that serves 2 explorations:
 ## Publish Docker Image to GitHub Container Registry
 
 Publishing to [GitHub Container Registry](https://docs.github.com/en/free-pro-team@latest/packages/getting-started-with-github-container-registry/about-github-container-registry) requires a [personal access token](https://docs.github.com/en/free-pro-team@latest/developers/apps/about-apps#personal-access-tokens) with these scopes:
+
 - repo (full access)
 - write:packages
 - delete:packages
+
 Store the _personal access token_ value in a [repository encypted secret](https://docs.github.com/en/free-pro-team@latest/actions/reference/encrypted-secrets) (e.g. `CR_PAT`) 
 
 Use the _repository encypted secret_ in a workflow file: `GCR_PASSWORD: ${{ secrets.CR_PAT }}` 
