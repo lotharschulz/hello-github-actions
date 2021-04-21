@@ -210,7 +210,6 @@ jobs:
     needs: [benchmark, test]
     name: Push Docker image to Container Registry
     runs-on: ubuntu-20.04
-
     steps:
       - uses: actions/checkout@v2
       - name: Build and Push
