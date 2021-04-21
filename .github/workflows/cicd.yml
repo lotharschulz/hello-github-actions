@@ -206,6 +206,7 @@ jobs:
           docker push docker.pkg.github.com/lotharschulz/hello-github-actions/hello-github-actions:$tag
 #          docker login https://docker.pkg.github.com -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} # success and --password-stdin warning
 
+
   ghr_push:
     needs: [benchmark, test]
     name: Push Docker image to Container Registry
