@@ -13,7 +13,7 @@ jobs:
   test:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/chec__kout@v1
     - name: tests the code
       run: make test
 
