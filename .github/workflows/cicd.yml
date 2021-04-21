@@ -226,3 +226,5 @@ jobs:
           echo "$IMAGE_AND_TAG"
           docker build -t $IMAGE_AND_TAG .
           docker push $IMAGE_AND_TAG
+
+
