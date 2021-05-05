@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: benchmarks the go code
-      run: make benchmark
+      run: make benchmark2
 
   test:
     runs-on: ubuntu-20.04
