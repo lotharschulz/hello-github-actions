@@ -1,4 +1,4 @@
-# Hi Jax
+# Hello Jax
 
 # GitHub Actions
 
