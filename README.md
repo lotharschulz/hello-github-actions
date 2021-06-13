@@ -45,6 +45,8 @@ This repository contains a workflow to
 - test the go code
 - benchmark the go code
 - builds a docker image & uploads it to dockerhub
+
+
 All that is defined in _[cicd.yml](.github/workflows/cicd.yml) file_.
 
 ![test, benchmark, docker build/push](Screenshot_2021-06-13_11-40-22.png) 
