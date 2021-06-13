@@ -47,7 +47,7 @@ This repository contains a workflow to
 - builds a docker image & uploads it to dockerhub
 All that is defined in _[cicd.yml](.github/workflows/cicd.yml) file_.
 
-![test, benchmark, docker build/push](screenshot2019-08-23--12.17.35.png) 
+![test, benchmark, docker build/push](Screenshot_2021-06-13_11-40-22.png) 
 
 ### Talks & Presentations
 
