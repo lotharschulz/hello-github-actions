@@ -2,10 +2,7 @@
 
 ![CI/CD Docker images to Dockerhub, GitHub Packages and GitHub Container Registry with GitHub Actions](https://github.com/lotharschulz/hello-github-actions/workflows/CI/CD%20Docker%20&%20Dockerhub%20with%20actions%20v2/badge.svg)
 
-A repository exploring GitHub Actions that serves 2 explorations:
-
-- [Customize Docker Image Tags for GitHub Docker Packages](https://www.lotharschulz.info/2020/07/23/github-packages-docker-image-tags-customization-with-github-actions)
-- [CI/CD with Github actions](https://www.lotharschulz.info/2019/08/26/ci-cd-with-github-actions-v2/)
+A repository exploring GitHub Actions to automate Docker deployments.
 
 ## Publish Docker Image to GitHub Container Registry
 
@@ -50,14 +47,15 @@ All that is defined in _[cicd.yml](.github/workflows/cicd.yml) file_.
 
 ![test, benchmark, docker build/push](screenshot2019-08-23--12.17.35.png) 
 
+### Talks & Presentations
+
+- **CI/CD with GitHub Actions - deploy Docker image to Dockerhub and GitHub Container Registry** - [DevOpsCon, London 2021](https://www.lotharschulz.info/wp-content/uploads/Bildschirmfoto-2020-11-25-um-11.53.56-1024x657.png) (remote). Slides: [ls.info CI/CD with GitHub Actions.pdf](https://www.lotharschulz.info/wp-content/uploads/CI_CD-with-GitHub-Actions-DevOpsCon-London-2021-04-21__.pdf)
+- **Open Source CI/CD components for GitHub Actions** - [Fossasia Summit 2020](https://www.lotharschulz.info/wp-content/uploads/Screenshot_2020-03-14_08-35-27_.png) (remote). Slides: [ls.info Open-Source-CI_CD-components-for-GitHub-Actions-Fossasia-Summit-2020.pdf](https://www.lotharschulz.info/wp-content/uploads/Open-Source-CI_CD-components-for-GitHub-Actions-Fossasia-Summit-2020.pdf)
+- **Continuous Integration & Delivery with GitHub Actions** - [Auto Code EU](https://www.auto-code.eu/sessions/solution-keynote-ci-cd-with-github-actions/). Slides: [ls.info CI/CD with GitHub Actions Auto Code Nov 2019.pdf](https://www.lotharschulz.info/wp-content/uploads/CI_CD-with-GitHub-Actions-Auto-Code-Nov-28th-2019.pdf)
+
 ### Blog Post
 
 **[CI/CD with GitHub Actions v2](https://www.lotharschulz.info/2019/08/26/ci-cd-with-github-actions-v2/)**
-
-### Presentation
-
-- **Open Source CI/CD components for GitHub Actions** - [Fossasia Summit 2020](https://www.lotharschulz.info/wp-content/uploads/Screenshot_2020-03-14_08-35-27_.png) (remote). Find the slides here: [ls.info Open-Source-CI_CD-components-for-GitHub-Actions-Fossasia-Summit-2020.pdf](https://www.lotharschulz.info/wp-content/uploads/Open-Source-CI_CD-components-for-GitHub-Actions-Fossasia-Summit-2020.pdf)
-- **Continuous Integration & Delivery with GitHub Actions** - [Auto Code EU](https://www.auto-code.eu/sessions/solution-keynote-ci-cd-with-github-actions/). Find the slides here: [ls.info CI_CD-with-GitHub-Actions-Auto-Code-Nov-28th-2019.pdf](https://www.lotharschulz.info/wp-content/uploads/CI_CD-with-GitHub-Actions-Auto-Code-Nov-28th-2019.pdf)
 
 ### make file targets
 
