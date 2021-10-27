@@ -125,7 +125,7 @@ jobs:
           GITHUB_RUN_NUMBER: ${GITHUB_GRAPHQL_URL}
         run: echo "$GITHUB_GRAPHQL_URL"
 
-push2dockerhub_if_linux:
+  push2dockerhub_if_linux:
     needs: [benchmark, test]
     strategy:
       fail-fast: false
