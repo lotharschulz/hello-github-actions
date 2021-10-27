@@ -158,23 +158,7 @@ jobs:
         echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin
         docker push lotharschulz/hello-github-actions:$tag
 
-  build_docker_and_push_to_github_packages:
-    needs: [benchmark, test]
-    name: build-push-action to docker.pkg.github.com
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Check out the repo
-        uses: actions/checkout@v2
-      - name: Push to GitHub Packages
-        uses: docker/build-push-action@v2
-        with:
-          # username: ${{ github.actor }}
-          # password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com
-          repository: lotharschulz/hello-github-actions/hello-github-actions-pkg
-          # tag_with_ref: true
-
-  build_docker_and_push_to_github_packages2:
+  push_to_docker_pkg:
     needs: [benchmark, test]
     name: build-push-action via docker cli
     runs-on: ubuntu-20.04
@@ -192,7 +176,7 @@ jobs:
           docker build -t docker.pkg.github.com/lotharschulz/hello-github-actions/hello-github-actions-pkg2:$tag .
           docker push docker.pkg.github.com/lotharschulz/hello-github-actions/hello-github-actions-pkg2:$tag
 
-  ghr_push:
+  ghcr_push:
     needs: [benchmark, test]
     name: ghcr push
     runs-on: ubuntu-20.04
