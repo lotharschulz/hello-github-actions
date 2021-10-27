@@ -168,11 +168,11 @@ jobs:
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v2
         with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          # username: ${{ github.actor }}
+          # password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
           repository: lotharschulz/hello-github-actions/hello-github-actions-pkg
-          tag_with_ref: true
+          # tag_with_ref: true
 
   build_docker_and_push_to_github_packages2:
     needs: [benchmark, test]
