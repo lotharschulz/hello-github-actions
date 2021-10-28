@@ -1,4 +1,4 @@
-# GitHub Actions
+# GitHub Actions - hello ADDO
 
 ![CI/CD Docker images to Dockerhub, GitHub Packages and GitHub Container Registry with GitHub Actions](https://github.com/lotharschulz/hello-github-actions/workflows/CI/CD%20Docker%20&%20Dockerhub%20with%20actions%20v2/badge.svg)
 
